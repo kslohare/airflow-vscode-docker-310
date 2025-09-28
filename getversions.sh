@@ -3,6 +3,7 @@
 # Get current timestamp
 timestamp=$(date +"%Y-%m-%d %H:%M:%S")
 
+
 # Append versions info to the file with timestamp
 (
   echo "===== $timestamp ====="
