@@ -1,0 +1,59 @@
+# =========================
+# Python related
+# =========================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environment
+.venv/
+env/
+venv/
+
+# =========================
+# VS Code related
+# =========================
+.vscode/
+*.code-workspace
+
+# =========================
+# Airflow related
+# =========================
+# Airflow logs
+airflow_home/logs/
+logs/
+# SQLite DB
+airflow_home/airflow.db
+# Airflow config sensitive files
+airflow_home/simple_auth_manager_passwords.json.generated
+# Temporary pickle files
+airflow_home/*.pickle
+# Cache folders
+airflow_home/__pycache__/
+
+# =========================
+# Docker related
+# =========================
+docker-compose.override.yml
+*.log
+*.pid
+*.swp
+*.swo
+
+# =========================
+# Project specific
+# =========================
+# Generated versions info
+current_versions.txt
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
