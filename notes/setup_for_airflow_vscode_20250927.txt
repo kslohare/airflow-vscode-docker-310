@@ -1,0 +1,57 @@
+Note:Assume that Docker in installed on Ubuntu OS
+
+#Documentation
+https://www.youtube.com/@ApacheAirflow
+
+1) Create project folder & fetch Airflow docker-compose
+mkdir -p ~/airflow-project && cd ~/airflow-project
+# Download the official docker-compose for the current stable Airflow docs
+curl -LfO 'https://airflow.apache.org/docs/apache-airflow/stable/docker-compose.yaml'
+# This docker-compose.yaml is the official, ready-to-run stack (webserver, scheduler, triggerer, DB, etc.).
+
+#Create the folders Airflow expects and a .env to avoid permission issues:
+mkdir -p ./dags ./logs ./plugins
+echo -e "AIRFLOW_UID=$(id -u)" > .env
+
+
+2) Initialize Airflow DB and default user
+Run the init task (this uses the compose file to create DB, admin user, etc.):
+# initialize DB and create user
+docker compose up airflow-init
+# After it finishes you should see a message that the admin user was created.
+# Docker Compose is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file (docker-compose.yml) to configure your application's services.
+# Then, with a single command, you create and start all the services from your configuration.
+
+3) Start Airflow services
+docker compose up -d
+# docker compose: This is the main command for interacting with Docker Compose.
+#up: This subcommand tells Docker Compose to build (if necessary), create, start, and attach to the containers for all services defined in your docker-compose.yml file.
+#-d (or --detach): This is the crucial flag. It means "detached." Instead of attaching to the output of the containers and displaying their logs directly in your terminal, it runs them in the background.
+
+# check containers
+docker compose ps
+
+# Opn
+Open the UI at http://localhost:8080 and log in (the init command prints default credentials; typically airflow/airflow or the ones shown in the output).
+
+
+4) Open the project in VS Code - VS Code will open with your Airflow project as the workspace.
+code .
+
+5) Work on your DAGs
+You can now edit files in dags/, plugins/, etc.
+When you save changes, Docker will detect them and your Airflow web UI will refresh automatically.
+
+6)  Keep Docker/Compose running
+Remember — VS Code just edits files.
+Your Airflow services still run in Docker, so keep them running in a terminal:
+docker compose up -d
+You can check running containers:
+docker compose ps
+And view logs if needed:
+docker compose logs -f
+
+# Now you have a full development setup:
+VS Code to edit DAGs & configs
+Docker Compose running Airflow services
+Airflow UI available at http://localhost:8080

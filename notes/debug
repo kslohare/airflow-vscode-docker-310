@@ -1,0 +1,2 @@
+airflow info | grep "Config file"
+airflow version

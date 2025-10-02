@@ -1,0 +1,19 @@
+In Airflow 3.x, the auth manager is the component responsible for handling authentication and authorization
+for the Airflow webserver and API. Think of it as the “gatekeeper” that decides who can log in and what they can do.
+
+# Add below lines in Airflow.cfg file
+[core]
+simple_auth_manager_users = admin:admin
+simple_auth_manager_all_admins = True
+
+[webserver]
+authenticate = True
+
+# Run the API server on port 9001
+airflow api-server --port 9001 -D
+
+#Start the scheduler, In another terminal:
+airflow scheduler -D
+
+3. Open Airflow UI -Visit:
+http://localhost:9001

@@ -1,0 +1,14 @@
+# versions
+https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html
+
+# Quick start
+https://airflow.apache.org/docs/apache-airflow/stable/start.html
+
+# Tutorials
+https://airflow.apache.org/docs/apache-airflow/stable/tutorial/index.html
+
+# Running Airflow locally
+https://airflow.apache.org/docs/apache-airflow/3.1.0/start.html
+
+#Running Airflow in Docker
+https://airflow.apache.org/docs/apache-airflow/2.1.4/start/docker.html

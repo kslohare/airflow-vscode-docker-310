@@ -57,3 +57,10 @@ current_versions.txt
 # =========================
 .DS_Store
 Thumbs.db
+airflow_home/airflow-api_server.err
+airflow_home/airflow-api_server.out
+airflow_home/airflow-dag-processor.err
+.gitignore
+airflow_home/airflow-scheduler.err
+airflow_home/airflow-scheduler.out
+airflow_home/airflow-dag-processor.out

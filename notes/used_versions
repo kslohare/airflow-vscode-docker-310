@@ -1,0 +1,5 @@
+cd /home/ksl/code/airflow-vscode-docker-310
+# source .venv/bin/activate
+python --version
+airflow version
+airflow info

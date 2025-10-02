@@ -1,0 +1,14 @@
+https://academy.astronomer.io/certification-exam-apache-airflow-3-fundamentals
+
+>>>>How to Get Certified
+# Explore the Astronomer Academy: Visit the Astronomer Academy website to learn about the available learning paths and certification exams.
+
+# Take a Learning Path (Optional but Recommended): Astronomer offers free learning paths (like Airflow 101) to guide you through the fundamental concepts needed to pass the exams.
+
+# Enroll in the Exam: You can purchase the exam directly from the Astronomer Academy website.
+
+# Pass the Exam: The exams are typically multiple-choice and timed. A passing score is required to earn the certification.
+
+##Key Benefits
+# Demonstrate Skills: Proves your ability to design, schedule, and oversee data pipelines using Airflow.
+# Advance Your Career: Highlights your expertise to potential employers and helps you take the next step in your Apache Airflow career.

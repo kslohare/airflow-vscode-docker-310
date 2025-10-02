@@ -1,0 +1,9 @@
+# No, you do not need to deactivate your virtual environment before running git init.
+# git is independent of Python or the virtual environment.
+# Running git init, git add, git commit, or git push works the same whether the virtual environment is active or not.
+First create repository fromg github side
+git init
+git add .
+git commit -m "Initial commit"
+git remote add origin https://github.com/kslohare/airflow-vscode-docker-310.git
+git push -u origin main

@@ -1,0 +1,171 @@
+Action	             Service Name
+Restart web UI	      airflow-apiserver
+Restart scheduler	    airflow-scheduler
+Restart worker	      airflow-worker
+Restart triggerer	    airflow-triggerer
+
+
+Note:Assume that Docker in installed on Ubuntu OS
+
+1) Create project folder, init a Python virtualenv, open in VS Code
+# make project folder and enter it
+cd /home/ksl/code
+mkdir -p airflow-vscode-docker
+cd airflow-vscode-docker
+
+# create a python virtual environment (uses system python3)
+python3 -m venv .venv
+
+# activate it (bash/zsh)
+source .venv/bin/activate
+
+# upgrade pip and install a few helpful dev packages
+pip install --upgrade pip setuptools wheel
+pip install pre-commit pylint black
+
+# optionally generate a requirements-dev.txt for VS Code
+pip freeze > requirements-dev.txt
+
+# open folder in VS Code
+code .
+
+Tip: Keep the venv inside the project (.venv) so VS Code auto-detects it. In VS Code select the interpreter .venv/bin/python (Command Palette → Python: Select Interpreter).
+
+### Run On Local
+
+
+
+
+
+
+####### Run in Docker
+2) Download the official docker-compose.yaml
+(From Airflow docs — place it into the project root.)
+cd airflow-vscode-docker
+curl -LfO 'https://airflow.apache.org/docs/apache-airflow/3.1.0/docker-compose.yaml'
+
+If you want a different Airflow version, replace 3.1.0 in the URL.
+
+4) Create the folders Airflow expects and set AIRFLOW_UID
+mkdir -p dags logs plugins config
+
+# A .env file is a text file that contains environment variables in KEY=VALUE format.
+#It is usually stored at the root of a project.
+#The name .env means it’s a hidden file on Unix/Linux (files starting with . are hidden by default).
+echo "AIRFLOW_UID=$(id -u)" > .env
+
+Add default web user credentials to .env (optional — recommended to set your own):
+
+cat >> .env <<'EOF'
+_AIRFLOW_WWW_USER_USERNAME=admin
+_AIRFLOW_WWW_USER_PASSWORD=admin
+EOF
+
+5) (Optional) Add local development helper files
+Create a .env.dev or dev-requirements.txt if you will run Python linting/tests locally inside the venv.
+Example .gitignore additions:
+.venv/
+__pycache__/
+logs/
+*.pyc
+
+6) Initialize Airflow DB (first-time only)
+Run the special init service (still with the virtualenv activated — we’re running Docker,
+so venv simply isolates local tools):
+# Below `docker compose up`    | Starts services defined in `docker-compose.yml`
+docker compose up airflow-init
+This runs DB migrations and creates the initial user(s). Wait until the init finishes and the command exits.
+
+7) Start the stack (in detached mode)
+docker compose up -d
+docker compose ps
+
+
+Open the web UI at http://localhost:8080
+. Use the username/password you put in .env (or the default airflow:airflow if you didn’t change it).
+
+8) Add an example DAG (project-named)
+
+Create dags/example_dag.py (paste into VS Code):
+
+# dags/example_dag.py
+from airflow.decorators import dag, task
+from datetime import datetime
+
+@dag(schedule_interval="@daily", start_date=datetime(2025, 9, 27), catchup=False, tags=["example", "airflow-vscode-docker"])
+def hello_airflow_vscode_docker():
+    @task
+    def say_hello():
+        print("Hello from airflow-vscode-docker!")
+
+    say_hello()
+
+dag = hello_airflow_vscode_docker()
+
+
+Because ./dags is mounted into the containers, Airflow will pick this file up automatically.
+
+9) Useful Docker & Airflow commands
+
+Run these from your project root (~/airflow-vscode-docker):
+
+# follow scheduler logs
+docker compose logs -f airflow-scheduler
+
+# list DAGs using the airflow CLI inside a container
+docker compose run --rm airflow-worker airflow dags list
+
+# run a task locally in a container (example)
+docker compose run --rm airflow-worker airflow tasks test example_dag say_hello 2025-09-27
+
+# stop services
+docker compose down
+
+# full cleanup (removes volumes & images)
+docker compose down --volumes --rmi all --remove-orphans
+
+10) Add Python packages your DAGs need (recommended approach)
+
+If your DAGs require extra Python packages, create a custom image and keep reproducibility:
+
+Add requirements.txt in project root with needed packages:
+
+# requirements.txt
+pandas==2.0.3
+requests==2.31.0
+# add whatever you need
+
+
+Create a Dockerfile next to docker-compose.yaml:
+
+FROM apache/airflow:3.1.0
+USER root
+COPY requirements.txt /requirements.txt
+RUN pip install --no-cache-dir -r /requirements.txt
+USER airflow
+
+
+In docker-compose.yaml replace image: apache/airflow:3.1.0 with build: . for the relevant services (webserver, scheduler, worker) — or follow the Airflow docs notes about extending the image. Then:
+
+docker compose build
+docker compose up -d
+
+11) VS Code tips
+
+Install these extensions: Python, Docker, Remote - Containers / Dev Containers, and Prettier / Black / Pylint if you use them.
+
+With the venv active (.venv), run formatters and linters from the virtualenv.
+
+Optionally create a .devcontainer to develop inside a container — this is useful if you want the exact runtime environment available in VS Code.
+
+12) Troubleshooting & gotchas
+
+If airflow-init fails with permissions issues → re-check AIRFLOW_UID=$(id -u) in .env and ownership of dags, logs, plugins.
+
+If containers restart repeatedly → ensure Docker has enough memory (≥4 GB recommended).
+
+If host networking is needed from tasks add extra_hosts: - "host.docker.internal:host-gateway" to the service in docker-compose.yaml (Linux note).
+
+>>>tasks
+1) Change the Web UI title
+docker compose up -d airflow-apiserver
