@@ -1,8 +1,11 @@
 from airflow.decorators import dag, task
 from datetime import datetime
+import pendulum
 
-@dag(schedule_interval="@daily", start_date=datetime(2025, 9, 27), catchup=False, 
-     tags=["hello", "airflow-vscode-docker"])
+# use a timezone-aware datetime (recommended)
+start = pendulum.datetime(2025, 9, 27, tz="UTC")
+
+@dag(schedule="@daily", start_date=start, catchup=False, tags=["hello", "airflow-vscode-docker"])
 def hello_airflow_vscode_docker():
     @task
     def say_hello():

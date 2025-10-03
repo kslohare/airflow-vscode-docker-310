@@ -9,9 +9,11 @@ A single unit of work in the DAG; tasks can be executed in parallel depending on
 ### 3) Operator:Thousands of operators in Airflow
 Defines the kind of work that will be done by a task; examples include BashOperator, PythonOperator, etc.
 
-### 4) Scheduler  Responsible for triggering the tasks based on the specified schedule and dependencies.
+### 4) Scheduler:
+Responsible for triggering the tasks based on the specified schedule and dependencies.
 
-### 5) Executor	 Defines how tasks are executed; options include LocalExecutor, CeleryExecutor, and DaskExecutor.
+### 5) Executor:
+Defines how tasks are executed; options include LocalExecutor, CeleryExecutor, and DaskExecutor. Executor are part of Scheduler
 
 ### 6) The API Server(Web UI): Dashboard in your car.
 Provides a graphical interface to monitor the state of tasks and DAGs, view logs, and manage workflows.

@@ -1,3 +1,24 @@
+It’s the standard INI file format (Airflow uses Python’s configparser under the hood).
+Key points
+
+Each section groups related configuration keys.
+
+The most important sections you’ll see in airflow.cfg are:
+
+[core] → fundamental settings (DAGs folder, executor, logging, etc.)
+
+[scheduler] → scheduler behavior tuning
+
+[webserver] → UI / API server settings
+
+[database] → DB connection settings
+
+[logging], [metrics], [secrets], [celery], [kubernetes], etc. depending on your setup.
+
+Some keys have moved to new sections in Airflow 3.x (e.g. [dag_processor] split from [scheduler]).
+
+Sections are case-insensitive ([Core] = [core]).
+
 ================== airflow.cfg is the main configuration file for Airflow =================
 # replace # lines before promt
 find and ^\s*#.*$
