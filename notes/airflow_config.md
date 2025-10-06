@@ -46,6 +46,7 @@ airflow db reset
 airflow db init
 
 ### To give UI name
+```
 Open your airflow.cfg file >> Find the section: [webserver]
 
 Add or modify this setting:
@@ -53,3 +54,4 @@ Add or modify this setting:
 instance_name = My Data Platform
 
 restart app-server
+```
