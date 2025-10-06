@@ -1,0 +1,38 @@
+[2m2025-10-06T05:29:54.424146Z[0m [[33m[1mwarning  [0m] [1mSkipping masking for a secret as it's too short (<5 chars)[0m [[0m[1m[34mairflow._shared.secrets_masker.secrets_masker[0m][0m [36mloc[0m=[35msecrets_masker.py:546[0m
+
+airflow command error: unrecognized arguments: start, see help above.
+Usage: airflow [-h] GROUP_OR_COMMAND ...
+
+Positional Arguments:
+  GROUP_OR_COMMAND
+
+    Groups
+      assets         Manage assets
+      backfill       Manage backfills
+      config         View configuration
+      connections    Manage connections
+      dags           Manage DAGs
+      db             Database operations
+      db-manager     Manage externally connected database managers
+      jobs           Manage jobs
+      pools          Manage pools
+      providers      Display providers
+      tasks          Manage tasks
+      variables      Manage variables
+
+    Commands:
+      api-server     Start an Airflow API server instance
+      cheat-sheet    Display cheat sheet
+      dag-processor  Start a dag processor instance
+      info           Show information about current Airflow and environment
+      kerberos       Start a kerberos ticket renewer
+      plugins        Dump information about loaded plugins
+      rotate-fernet-key
+                     Rotate encrypted connection credentials and variables
+      scheduler      Start a scheduler instance
+      standalone     Run an all-in-one copy of Airflow
+      triggerer      Start a triggerer instance
+      version        Show the version
+
+Options:
+  -h, --help         show this help message and exit

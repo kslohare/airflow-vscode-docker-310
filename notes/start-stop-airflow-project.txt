@@ -7,6 +7,8 @@ deactivate
 airflow api-server --port 9001 -D #Run the API server on port 9001
 airflow scheduler -D # Start the scheduler
 airflow dag-processor -D # Start DAG processor
+airflow triggerer -D
+
 
 # Open Airflow UI -Visit:
 http://localhost:9001
@@ -15,7 +17,7 @@ http://localhost:9001
 pkill -f "airflow api_server"
 pkill -f "airflow scheduler"
           OR
-ps aux | grep 'airflow api_server'
+ps aux | grep 'airflow api-server'
 ps aux | grep 'airflow scheduler'
 ps aux | grep 'airflow dag-processor'
 
