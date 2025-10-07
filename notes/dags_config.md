@@ -1,5 +1,7 @@
 https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html#declaring-a-dag
 
+![alt text](image-2.png)
+
 ## Basic DAG Config
 1) Make sure correct folder set in airflow.cfg file
 dags_folder = /home/ksl/code/airflow-vscode-docker-310/dags/
