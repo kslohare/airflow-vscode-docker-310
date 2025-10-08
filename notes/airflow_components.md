@@ -1,5 +1,13 @@
+# In Airflow’s architecture:
+| Layer        | Description                                        |
+| ------------ | -------------------------------------------------- |
+| **DAG**      | Defines *what* tasks to run                        |
+| **Operator** | Defines *how* a task behaves                       |
+| **Hook**     | Handles *the connection* and *low-level API logic* |
+
+
+
 # Key components of Airflow include:
-## Component	Description
 ### 1) DAG: Like a receipe
 Defines the workflow; each DAG file describes a complete workflow in proper sequence.
 
