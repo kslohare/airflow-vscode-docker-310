@@ -20,3 +20,12 @@ When an asset is updated (or an “asset event” occurs), Airflow can trigger d
 
 [1]: https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/asset-scheduling.html?utm_source=chatgpt.com "Asset-Aware Scheduling — Airflow 3.0.3 Documentation"
 
+### An Asset is a collection of related data:
+A table in a DB
+A Persisted ML Model
+A report
+A directory
+The output of an API
+A file
+
+

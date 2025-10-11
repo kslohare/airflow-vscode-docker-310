@@ -1,0 +1,71 @@
+# Code Coverage 
+Code Coverage is a **software quality metric** that measures how much of your source code is executed when automated tests (like unit tests, integration tests, or system tests) run.
+
+It helps you understand which parts of your code are tested and which are not, ensuring better testing completeness and code reliability.
+
+# What Is Code Coverage?
+
+When you run your test suite, code coverage tools analyze which lines, statements, or branches of your code were executed during those tests.
+This produces a coverage report — usually showing results as a percentage.
+
+For example:
+| Metric                 | Meaning                             | Example                                 |
+| ---------------------- | ----------------------------------- | --------------------------------------- |
+| **Line Coverage**      | % of lines executed by tests        | 80% of all code lines ran during tests  |
+| **Branch Coverage**    | % of control branches executed      | 70% of all if/else paths were executed  |
+| **Function Coverage**  | % of functions/methods called       | 90% of defined functions were called    |
+| **Statement Coverage** | % of statements executed            | 85% of all statements executed          |
+| **Condition Coverage** | % of boolean sub-expressions tested | 60% of all conditions tested true/false |
+
+***
+
+# Installation
+## Option A – Basic coverage.py
+
+pip install coverage
+
+
+## Verify installation:
+
+coverage --version
+
+pip install pytest pytest-cov
+
+## Run coverage manually
+coverage run -m pytest
+
+
+## Generate Reports
+### Text report (terminal)
+coverage report -m
+
+### HTML report (open in browser)
+coverage html
+xdg-open htmlcov/index.html
+
+### XML report (for CI/CD or Codecov)
+coverage xml
+
+
+## Optional .coveragerc Configuration
+Create a file named .coveragerc in your project root:
+```ini
+[run]
+branch = True
+source =
+    your_package_name
+omit =
+    tests/*
+    */__init__.py
+
+[report]
+show_missing = True
+exclude_lines =
+    pragma: no cover
+    if __name__ == "__main__":
+
+```
+
+## For running airflow related unit test
+pytest tests/ --cov=your_airflow_plugin --cov-report=html
+
